@@ -1,17 +1,11 @@
 import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.158/build/three.module.js";
 
 const canvas = document.getElementById("universe");
-const sizes = { width: canvas.clientWidth, height: canvas.clientHeight };
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x01020a);
 
-const camera = new THREE.PerspectiveCamera(
-  55,
-  sizes.width / sizes.height,
-  0.1,
-  200
-);
+const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 200);
 camera.position.set(0, 10, 35);
 scene.add(camera);
 
@@ -20,9 +14,24 @@ const renderer = new THREE.WebGLRenderer({
   antialias: true,
   alpha: true,
 });
-renderer.setSize(sizes.width, sizes.height, false);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.shadowMap.enabled = true;
+
+function updateRendererSize() {
+  const rect = canvas.getBoundingClientRect();
+  const width =
+    rect.width || canvas.parentElement.offsetWidth || window.innerWidth;
+  const height =
+    rect.height ||
+    canvas.parentElement.offsetHeight ||
+    window.innerHeight * 0.6;
+  renderer.setSize(width, height, false);
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+}
+
+updateRendererSize();
+window.addEventListener("load", () => updateRendererSize());
 
 const ambient = new THREE.AmbientLight(0x405bff, 0.35);
 scene.add(ambient);
@@ -183,15 +192,12 @@ function animate() {
 
 animate();
 
-function onResize() {
-  const width = canvas.clientWidth;
-  const height = canvas.clientHeight;
-  renderer.setSize(width, height, false);
-  camera.aspect = width / height;
-  camera.updateProjectionMatrix();
+const canvasContainer = canvas.parentElement;
+if (canvasContainer) {
+  const resizeObserver = new ResizeObserver(() => updateRendererSize());
+  resizeObserver.observe(canvasContainer);
 }
-
-window.addEventListener("resize", onResize);
+window.addEventListener("resize", () => updateRendererSize());
 
 // Scroll reveal animations
 const observer = new IntersectionObserver(
@@ -213,24 +219,39 @@ document
 const cursorDot = document.getElementById("cursor-dot");
 const cursorRing = document.getElementById("cursor-ring");
 
-let cursorVisible = true;
+let cursorVisible = false;
 const cursorPosition = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
 let ringScale = 1;
 
-const updateCursor = () => {
-  if (!cursorVisible) return;
+const renderCursor = () => {
   const translate = `translate(calc(${cursorPosition.x}px - 50%), calc(${cursorPosition.y}px - 50%))`;
-  cursorDot.style.transform = translate;
-  cursorRing.style.transform = `${translate} scale(${ringScale})`;
-  requestAnimationFrame(updateCursor);
+  if (cursorVisible) {
+    cursorDot.style.opacity = "1";
+    cursorRing.style.opacity = "1";
+    cursorDot.style.transform = translate;
+    cursorRing.style.transform = `${translate} scale(${ringScale})`;
+  } else {
+    cursorDot.style.opacity = "0";
+    cursorRing.style.opacity = "0";
+  }
+
+  requestAnimationFrame(renderCursor);
 };
 
-updateCursor();
+renderCursor();
 
 document.addEventListener("pointermove", (event) => {
   cursorVisible = true;
   cursorPosition.x = event.clientX;
   cursorPosition.y = event.clientY;
+});
+
+document.addEventListener("pointerleave", () => {
+  cursorVisible = false;
+});
+
+document.addEventListener("pointerenter", () => {
+  cursorVisible = true;
 });
 
 document.addEventListener("pointerdown", () => {
@@ -279,9 +300,96 @@ const toggleCursor = (event) => {
     cursorRing.style.display = "";
     cursorVisible = true;
     ringScale = 1;
-    updateCursor();
   }
 };
 
 mediaQuery.addEventListener("change", toggleCursor);
 toggleCursor(mediaQuery);
+
+// Metric counters reveal
+const counters = document.querySelectorAll("[data-counter]");
+const prefersReducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+);
+
+const formatNumber = (value, decimals) =>
+  Number(value).toLocaleString(undefined, {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  });
+
+const setCounterValue = (element, progress) => {
+  const target = parseFloat(element.dataset.counter ?? "0");
+  const decimals = parseInt(element.dataset.decimals ?? "0", 10);
+  const suffix = element.dataset.suffix ?? "";
+  const prefix = element.dataset.prefix ?? "";
+  const current = target * progress;
+  element.textContent = `${prefix}${formatNumber(current, decimals)}${suffix}`;
+};
+
+const animateCounter = (element) => {
+  if (element.dataset.animated) return;
+  const duration = parseInt(element.dataset.duration ?? "2200", 10);
+  const start = performance.now();
+
+  const step = (timestamp) => {
+    const elapsed = timestamp - start;
+    const progress = Math.min(elapsed / duration, 1);
+    setCounterValue(element, progress);
+    if (progress < 1) {
+      requestAnimationFrame(step);
+    } else {
+      element.dataset.animated = "true";
+    }
+  };
+
+  requestAnimationFrame(step);
+};
+
+if (counters.length) {
+  if (prefersReducedMotion.matches) {
+    counters.forEach((counter) => setCounterValue(counter, 1));
+  } else {
+    const counterObserver = new IntersectionObserver(
+      (entries, entryObserver) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            entryObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.45 }
+    );
+
+    counters.forEach((counter) => {
+      counterObserver.observe(counter);
+    });
+  }
+
+  if (typeof prefersReducedMotion.addEventListener === "function") {
+    prefersReducedMotion.addEventListener("change", (event) => {
+      if (event.matches) {
+        counters.forEach((counter) => setCounterValue(counter, 1));
+      }
+    });
+  }
+}
+
+// Timeline reveal accents
+const timelineItems = document.querySelectorAll(".timeline__item");
+if (timelineItems.length) {
+  const timelineObserver = new IntersectionObserver(
+    (entries, entryObserver) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          entryObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.4, rootMargin: "0px 0px -10%" }
+  );
+
+  timelineItems.forEach((item) => timelineObserver.observe(item));
+}
