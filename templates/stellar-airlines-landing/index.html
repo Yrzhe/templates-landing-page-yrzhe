@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stellar Airlines | Beyond Earth</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
+    <header class="nav">
+      <div class="logo">StellarAir</div>
+      <nav>
+        <a href="#destinations">Destinations</a>
+        <a href="#fleet">Fleet</a>
+        <a href="#experience">Experience</a>
+        <a href="#booking">Reserve</a>
+      </nav>
+      <button class="btn btn-outline">Log in</button>
+    </header>
+
+    <main>
+      <section class="hero" id="hero">
+        <div class="hero__canvas-wrapper">
+          <canvas id="universe"></canvas>
+        </div>
+        <div class="hero__content">
+          <p class="eyebrow">Next-Gen Orbital Airline</p>
+          <h1>
+            Explore the Solar System<br />
+            on your next vacation.
+          </h1>
+          <p class="subtitle">
+            Seamless departures from Earth to Mars, Titan, Europa and beyond.
+            Private cabins, gravity gardens and aurora lounges await.
+          </p>
+          <div class="hero__actions">
+            <a href="#booking" class="btn btn-primary">Plan your trajectory</a>
+            <a href="#fleet" class="btn btn-ghost">Meet the fleet</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="destinations">
+        <div class="panel__content">
+          <h2>Choose your celestial playground</h2>
+          <p>
+            From weekend getaways on the Moon to month-long expeditions across
+            the Jovian moons, our itineraries synchronize with planetary windows
+            so you never miss a once-in-a-century spectacle.
+          </p>
+          <div class="grid">
+            <article>
+              <h3>Mars Oasis</h3>
+              <p>Gravity spas, crimson dunes and sunset cocktail domes.</p>
+            </article>
+            <article>
+              <h3>Titan Dunes</h3>
+              <p>Hover-skimming over methane seas with expert navigators.</p>
+            </article>
+            <article>
+              <h3>Europa Lights</h3>
+              <p>Glacial caverns and bioluminescent lagoons beneath the ice.</p>
+            </article>
+            <article>
+              <h3>Lunar Zenith</h3>
+              <p>
+                A 24-hour lounge with panoramic Earthrise and zero-grav dining.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel panel--alt" id="fleet">
+        <div class="panel__content">
+          <h2>Fleet tuned for stellar comfort</h2>
+          <p>
+            Quantum thrusters, adaptive shields and AI co-pilots ensure that
+            your voyage is as smooth as it is spectacular.
+          </p>
+          <ul class="specs">
+            <li>
+              <span class="specs__label">Aurora-Class</span>
+              <span class="specs__value"
+                >Orbital suites &amp; holodeck lounges</span
+              >
+            </li>
+            <li>
+              <span class="specs__label">Nebula-Class</span>
+              <span class="specs__value">Planet-hopping explorers</span>
+            </li>
+            <li>
+              <span class="specs__label">Cosmos-Class</span>
+              <span class="specs__value"
+                >Deep-space resorts with artificial gravity</span
+              >
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="panel" id="experience">
+        <div class="panel__content">
+          <h2>Immersive gravity-tailored experiences</h2>
+          <p>
+            Each itinerary is choreographed with sensory lounges, cosmic
+            cuisine, and constellation concerts synchronized to your orbital
+            path.
+          </p>
+          <div class="experience">
+            <div class="experience__item">
+              <span class="tag">Aurora lounge</span>
+              <h3>Relax under engineered starlight</h3>
+              <p>
+                Chromatic nebula projectors and responsive acoustics adapt to
+                your biometrics for pure serenity.
+              </p>
+            </div>
+            <div class="experience__item">
+              <span class="tag">Gravity garden</span>
+              <h3>Float through living ecosystems</h3>
+              <p>
+                Oxygen-rich habitats designed with zero-gravity flora and
+                luminous fauna.
+              </p>
+            </div>
+            <div class="experience__item">
+              <span class="tag">Command hub</span>
+              <h3>Chart real-time trajectories</h3>
+              <p>
+                Collaborate with stellar navigators and pilot your own docking
+                sequences.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel panel--cta" id="booking">
+        <div class="panel__content">
+          <h2>Secure your launch window</h2>
+          <p>
+            Reserve now and receive a personalized orbital itinerary designed by
+            our celestial concierge team.
+          </p>
+          <form class="cta-form">
+            <label>
+              <span>Preferred departure month</span>
+              <input type="month" required />
+            </label>
+            <label>
+              <span>Destination focus</span>
+              <select required>
+                <option value="">Select orbit</option>
+                <option>Mars Oasis</option>
+                <option>Titan Dunes</option>
+                <option>Europa Lights</option>
+                <option>Lunar Zenith</option>
+              </select>
+            </label>
+            <label>
+              <span>Passenger count</span>
+              <input type="number" min="1" max="12" value="2" required />
+            </label>
+            <button type="submit" class="btn btn-primary">
+              Reserve launch
+            </button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© 2088 Stellar Airlines. Licensed for interplanetary travel.</p>
+      <div class="socials">
+        <a href="#">GalacticNet</a>
+        <a href="#">HoloCast</a>
+        <a href="#">StarGram</a>
+      </div>
+    </footer>
+
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
