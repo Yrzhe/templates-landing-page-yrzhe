@@ -1,14 +1,22 @@
 :root {
   color-scheme: dark;
   --bg: #04060f;
-  --card-bg: rgba(18, 22, 35, 0.9);
-  --card-border: rgba(255, 255, 255, 0.06);
   --text-primary: #f8fbff;
   --text-secondary: rgba(235, 240, 255, 0.68);
   --accent: #7c5cff;
   --accent-2: #ff5f87;
   --accent-3: #48e0b6;
+  --surface-muted: rgba(248, 251, 255, 0.08);
+  --surface-soft: rgba(248, 251, 255, 0.06);
+  --surface-strong: rgba(255, 255, 255, 0.05);
+  --glass-gradient: linear-gradient(135deg, rgba(18, 22, 35, 0.9), rgba(20, 25, 42, 0.76));
+  --outline-gradient: linear-gradient(145deg, rgba(124, 92, 255, 0.12), rgba(255, 95, 135, 0.08));
+  --card-border: rgba(255, 255, 255, 0.06);
+  --card-radius: 26px;
+  --card-padding: 1.75rem;
   --blur: 18px;
+  --chip-radius: 16px;
+  --shadow-card: 0 20px 60px rgba(2, 6, 23, 0.45);
   font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
 }
@@ -78,16 +86,16 @@ body::before {
 }
 
 .card {
-  background: linear-gradient(135deg, rgba(18, 22, 35, 0.9), rgba(20, 25, 42, 0.76));
+  background: var(--glass-gradient);
   border: 1px solid var(--card-border);
-  border-radius: 26px;
-  padding: 1.75rem;
+  border-radius: var(--card-radius);
+  padding: var(--card-padding);
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  box-shadow: 0 20px 60px rgba(2, 6, 23, 0.45);
+  box-shadow: var(--shadow-card);
   backdrop-filter: blur(var(--blur));
 }
 
@@ -95,9 +103,9 @@ body::before {
   content: "";
   position: absolute;
   inset: 1px;
-  border-radius: 24px;
+  border-radius: calc(var(--card-radius) - 2px);
   padding: 1px;
-  background: linear-gradient(145deg, rgba(124, 92, 255, 0.12), rgba(255, 95, 135, 0.08));
+  background: var(--outline-gradient);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -152,7 +160,7 @@ body::before {
 
 .pill {
   padding: 0.4rem 0.85rem;
-  background: rgba(248, 251, 255, 0.08);
+  background: var(--surface-muted);
   border-radius: 999px;
   font-size: 0.85rem;
   font-weight: 500;
@@ -265,7 +273,7 @@ body::before {
   background: rgba(248, 251, 255, 0.04);
   border-radius: 18px;
   padding: 0.9rem 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--surface-soft);
 }
 
 .tool-icon {
@@ -369,9 +377,9 @@ body::before {
   align-items: center;
   gap: 0.45rem;
   padding: 0.75rem 0.95rem;
-  border-radius: 16px;
-  background: rgba(248, 251, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--chip-radius);
+  background: var(--surface-soft);
+  border: 1px solid var(--surface-strong);
   color: var(--text-primary);
   text-decoration: none;
   font-size: 0.9rem;
