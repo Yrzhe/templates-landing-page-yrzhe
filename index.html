@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shawn Mendes – Creative Backend Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="noise"></div>
+    <div class="app">
+      <aside class="panel panel--stack">
+        <header class="panel__header">
+          <span class="panel__header-icon">{}</span>
+          <span class="panel__header-title">Tech Stack</span>
+        </header>
+        <section class="panel__body">
+          <div class="tag-list">
+            <h3 class="tag-list__title">Core</h3>
+            <ul class="tag-list__grid">
+              <li>Node.js</li>
+              <li>TypeScript</li>
+              <li>React</li>
+              <li>Next.js</li>
+              <li>GraphQL</li>
+              <li>PostgreSQL</li>
+              <li>Prisma</li>
+              <li>Tailwind</li>
+              <li>tRPC</li>
+            </ul>
+          </div>
+          <div class="tag-list">
+            <h3 class="tag-list__title">Tools</h3>
+            <ul class="tag-list__grid">
+              <li>VS Code</li>
+              <li>Docker</li>
+              <li>Figma</li>
+              <li>Raycast</li>
+              <li>Notion</li>
+              <li>Linear</li>
+            </ul>
+          </div>
+        </section>
+        <footer class="panel__footer">
+          <p>Currently crafting delightful developer experiences at midnight.</p>
+        </footer>
+      </aside>
+      <main class="grid">
+        <section class="card card--profile">
+          <div class="profile">
+            <img src="https://avatars.githubusercontent.com/u/000000?v=4" alt="Shawn Mendes avatar" />
+            <div>
+              <h1>Shawn Mendes</h1>
+              <p>@ezzzshaw</p>
+            </div>
+            <span class="status status--active">Available for work</span>
+          </div>
+          <p class="intro">
+            I build expressive backend platforms with a focus on developer empathy and scale. Based in Goa, India.
+          </p>
+          <div class="cta-group">
+            <a class="btn" href="mailto:hello@shawndev.com">hello@shawndev.com</a>
+            <a class="btn btn--ghost" href="https://shawndev.com" target="_blank" rel="noreferrer">Portfolio</a>
+          </div>
+        </section>
+
+        <section class="card card--tools">
+          <header class="card__header">
+            <span class="icon">☀️</span>
+            <h2>Daily Tool Stack</h2>
+          </header>
+          <div class="tool-list">
+            <article class="tool">
+              <span class="tool__label">Terminal</span>
+              <p class="tool__desc">Warp + tmux sessions with dotfile magic.</p>
+            </article>
+            <article class="tool">
+              <span class="tool__label">Code</span>
+              <p class="tool__desc">VS Code, GitHub Copilot, ESLint, Prettier.</p>
+            </article>
+            <article class="tool">
+              <span class="tool__label">Databases</span>
+              <p class="tool__desc">PlanetScale, Supabase, Redis Cloud.</p>
+            </article>
+            <article class="tool">
+              <span class="tool__label">Ops</span>
+              <p class="tool__desc">Vercel, Fly.io, GitHub Actions pipelines.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="card card--quote">
+          <p class="quote">
+            "Code is poetry, but production is the stage. I obsess over both to ship resilient systems with a human touch."
+          </p>
+          <span class="quote__source">— Shawn Mendes</span>
+        </section>
+
+        <section class="card card--project">
+          <header class="card__header">
+            <span class="icon">📦</span>
+            <h2>Current Focus</h2>
+          </header>
+          <p class="card__body">
+            Building a modular SaaS starter kit with multi-tenant billing, generative AI tooling, and a delightful onboarding flow.
+          </p>
+          <ul class="pill-group">
+            <li>Monorepos</li>
+            <li>Event-driven</li>
+            <li>Design Systems</li>
+          </ul>
+        </section>
+
+        <section class="card card--links">
+          <h2>Links</h2>
+          <ul class="social-links">
+            <li><a href="https://twitter.com/ezzzshaw">Twitter</a></li>
+            <li><a href="https://github.com/ezzzshaw">GitHub</a></li>
+            <li><a href="https://dribbble.com/ezzzshaw">Dribbble</a></li>
+            <li><a href="https://www.linkedin.com/in/ezzzshaw">LinkedIn</a></li>
+          </ul>
+        </section>
+
+        <section class="card card--journal">
+          <header class="card__header">
+            <span class="icon">🛰️</span>
+            <h2>Signal Log</h2>
+          </header>
+          <ul class="journal">
+            <li>
+              <span class="journal__time">08:00</span>
+              <p>Standup sync with the platform crew and planning the next release train.</p>
+            </li>
+            <li>
+              <span class="journal__time">12:30</span>
+              <p>Pairing session on a gnarly database migration — chaos avoided.</p>
+            </li>
+            <li>
+              <span class="journal__time">20:15</span>
+              <p>Late night writing session for the "Scaling with Empathy" newsletter.</p>
+            </li>
+          </ul>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
